@@ -14,13 +14,18 @@ var previousCities = [];
 
 
 $('.btn-primary').on('click', function() {
-    var key = 'City';
-    var value = $(this).parent().prev().children().val();
-    localStorage.setItem(key, value);
+    var value = $('#userInput').val();
+    console.log(previousCities);
+    previousCities.push(value);
+    localStorage.setItem('Cities', previousCities);
+    console.log(previousCities)
 
-    var listItem = document.createElement('li');
-    $('#City').append(listItem);
-    listItem.textContent = value;
+    for(var i = 0; i < previousCities.length; i++) {
+        var buttonItem = document.createElement('button');
+        $('#searched_cities_container').append(buttonItem);
+        buttonItem.textContent = previousCities[i];
+    }
+    
     
 })
     
