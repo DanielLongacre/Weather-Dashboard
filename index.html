@@ -14,14 +14,16 @@
         <div class="col-3 justify-content-center pt-5">
             <h5 class="justify-content-center pt-2 mb-3">Search by City: </h5>
             <div class="input-group rounded mb-4">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                <span class="input-group-text border-0" id="search-addon">
-                  <i class="fas fa-search"></i>
-                </span>
+                <input id="userInput" type="search" class="form-control rounded" placeholder="Enter City" aria-label="Search" aria-describedby="search-addon" />
             </div>
-            <h5 class="justify-content-center pt-3">Your previously searched cities: </h5>
+            <div>
+                <button type="button" class="btn btn-primary col-12">Search</button>
+            </div>
+            <hr>
+            <h5 class="justify-content-center pt-1">Your previously searched cities: </h5>
             <div class="container my-3 col-12" id="searched_cities_container">
                 <!-- Where I will add a list of all cities searched from local Storage -->
+                <ul id="City"></ul>
             </div>
         </div>
 

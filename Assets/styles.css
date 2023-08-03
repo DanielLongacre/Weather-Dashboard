@@ -4,3 +4,11 @@
     font-family: Arial, Helvetica, sans-serif;
     color: white
 }
+li {
+    color: #053DC5;
+    list-style: none;
+    margin-bottom: 1.3em;
+    border: solid 1px;
+    text-align: center;
+    margin-left: -40px;
+}
