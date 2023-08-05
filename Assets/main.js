@@ -1,6 +1,6 @@
-// Function to ensure that the code isn't run until 
-// the browser has finished rendering all the elements
-// in the html
+var userCity = document.querySelector('#userInput');
+
+
 $(function() {
 
 
@@ -25,8 +25,10 @@ var getCityData = function (city) {
         });
 };
 
-function displayWeather() {
-    
+var displayWeather = function(cityName, searchTerm) {
+    if(cityName.length === 0) {
+        city
+    }
 }
 
 var userInput = document.querySelector('#userInput');
