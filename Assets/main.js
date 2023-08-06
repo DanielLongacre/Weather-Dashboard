@@ -100,9 +100,11 @@ function APIcall() {
                         let year = data.list[i].dt_txt.split("-")[0];
                         let month = data.list[i].dt_txt.split("-")[1];
                         let temp = data.list[i].main.temp;
+                        let wind = data.list[i].wind.speed;
                         $("#" + day_number + "date").text(month + "/" + day + "/" + year); 
                         $("#" + day_number + "five_day_humidity").text("Humidity: " + data.list[i].main.humidity);
                         $("#" + day_number + "five_day_temp").text("Temp: " + temp + "F");
+                        $("#" + day_number + "five_day_wind").text("Wind Speed: " + wind);
                         console.log(data.list[i].dt_txt.split("-"));
                         $("#" + day_number + "five_day_icon").attr("src", "http://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + ".png");
                         console.log(data.list[i].main.temp);
