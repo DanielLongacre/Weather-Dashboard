@@ -71,7 +71,7 @@ function userCity() {
 
         APIcall();
         saveCity();
-        prevCityBtns()
+        prevCityBtns();
     })
 }
 
@@ -88,39 +88,43 @@ function APIcall() {
     $('#name_of_city').text(city);
 
     fetch(queryURL).then(function(response) {
-        var day_number = 0;
+        if (response.ok) {
+            response.json().then(function (data) {
+                var day_number = 0;
 
-        //Iterate through weather data sets
-        for(var i = 0; i < response.list.length; i++) {
+                //Iterate through weather data sets
+                for(var i = 0; i < data.list.length; i++) {
 
-            if(response.list[i].dt_txt.split(" ")[1] == "09:00:00") {
-                let day = response.list[i].dt_txt.split("-")[2].split(" ")[0];
-                let year = response.list[i].dt_txt.split("-")[0];
-                let month = response.list[i].dt_txt.split("-")[1];
-                let temp = response.list[i].main.temp;
-                $("#" + day_number + "date").text(month + "/" + day + "/" + year); 
-                $("#" + day_number + "five_day_humidity").text("Humidity: " + response.list[i].main.humidity);
-                $("#" + day_number + "five_day_temp").text("Temp: " + temp + "F");
-                console.log(response.list[i].dt_txt.split("-"));
-                $("#" + day_number + "five_day_icon").attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png");
-                console.log(response.list[i].main.temp);
-                console.log(day_number);
-                day_number++;
-            }
+                    if(data.list[i].dt_txt.split(" ")[1] == "09:00:00") {
+                        let day = data.list[i].dt_txt.split("-")[2].split(" ")[0];
+                        let year = data.list[i].dt_txt.split("-")[0];
+                        let month = data.list[i].dt_txt.split("-")[1];
+                        let temp = data.list[i].main.temp;
+                        $("#" + day_number + "date").text(month + "/" + day + "/" + year); 
+                        $("#" + day_number + "five_day_humidity").text("Humidity: " + data.list[i].main.humidity);
+                        $("#" + day_number + "five_day_temp").text("Temp: " + temp + "F");
+                        console.log(data.list[i].dt_txt.split("-"));
+                        $("#" + day_number + "five_day_icon").attr("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
+                        console.log(data.list[i].main.temp);
+                        console.log(day_number);
+                        day_number++;
+                    }
 
-        }
-        
+                }
+            })
+        }  
+ 
     })
 
 
-    fetch(current_weather_url).then(function(current_data) {
-        console.log(current_data);
-        let temp = Math.round(((current_data.main.temp - 273.15) * 9/5 + 32))
+    fetch(current_weather_url).then(function(response) {
+        console.log(response);
+        let temp = response.main.temp;
         console.log("The temperature in " + city + " is: " + temp);
         $("#today_temp").text("Temperature: " + temp + String.fromCharCode(176)+"F");
-        $("#today_humidity").text("Humidity: " + current_data.main.humidity);
-        $("#today_wind_speed").text("Wind Speed: " + current_data.wind.speed);
-        $("#today_icon_div").attr({"src": "http://openweathermap.org/img/w/" + current_data.weather[0].icon + ".png",
+        $("#today_humidity").text("Humidity: " + response.main.humidity);
+        $("#today_wind_speed").text("Wind Speed: " + response.wind.speed);
+        $("#today_icon_div").attr({"src": "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png",
          "height": "100px", "width":"100px"});
 
     })
