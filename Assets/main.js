@@ -1,7 +1,7 @@
+var pastCities = document.querySelector('#');
 var userCity = document.querySelector('#userInput');
-
-
-$(function() {
+var forecastContainerEl = document.querySelector('#forecast-container');
+var citySearchTerm = document.querySelector('#city-search-term');
 
 
 var getCityData = function (city) {
@@ -58,5 +58,3 @@ $('.btn-primary').on('click', function() {
     
 })
     
-
-});
