@@ -1,18 +1,15 @@
 var pastCities = document.querySelector('#searched_cities_container');
 var cities = [];
 var city = '';
-var APIKey = '6fda8e05fd463ff807e270df95f92c8d';
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
 
 //Function that gets previously searched for cities
-function pastCities() {
+function prevCities() {
     var saved_cities = JSON.parse(localStorage.getItem('cities'));
 
     if(saved_cities !== null) {
-        cities = saved_cities
+        cities = saved_cities;
     }
-
     prevCityBtns();
 }
 
@@ -38,7 +35,7 @@ function prevCityBtns() {
         btnEl.setAttribute('class', 'listBtn');
 
         pastCities.appendChild(btnEl);
-
+        prevCityClick();
     }
 }
 
@@ -49,7 +46,7 @@ function prevCityClick() {
         event.preventDefault();
         console.log("Does this work?");
         city = $(this).text().trim();
-
+        APIcall();
     })
 }
 
@@ -63,7 +60,7 @@ function userCity() {
         cities.push(city);
 
         //Don't let array be larger than 7
-        if(citites.length > 7) {
+        if(cities.length > 7) {
             cities.shift()
         }
 
@@ -72,15 +69,50 @@ function userCity() {
             return;
         }
 
+        APIcall();
         saveCity();
         prevCityBtns()
     })
 }
 
 
+//Function to get API data
+function APIcall() {
 
+    var url = 'https://api.openweathermap.org/data/2.5/forecast?q=';
+    var currentURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
+    var APIKey = '&appid=6fda8e05fd463ff807e270df95f92c8d';
+    var queryURL = url + city + APIKey;
+    current_weather_url = currentURL + city + APIKey;
+
+    $('#name_of_city').text(city);
+
+    fetch(queryURL).then(function(response) {
+        var day_number = 0;
+
+        //Iterate through weather data sets
+        for(var i = 0; i < response.list.length; i++) {
+            let day = response.list[i].dt_txt.split("-")[2].split(" ")[0];
+            let month = response.list[i].dt_txt.split("-")[1];
+            let year = response.list[i].dt_txt.split("-")[0];
+            $("#" + day_number + "date").text(month + "/" + day + "/" + year); 
+            let temp = Math.round(((response.list[i].main.temp - 273.15) *9/5+32));
+            $("#" + day_number + "five_day_temp").text("Temp: " + temp + String.fromCharCode(176)+"F");
+            $("#" + day_number + "five_day_humidity").text("Humidity: " + response.list[i].main.humidity);
+            $("#" + day_number + "five_day_icon").attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png");
+            console.log(response.list[i].dt_txt.split("-"));
+            console.log(day_number);
+            console.log(response.list[i].main.temp);
+            day_number++; 
+        }
+
+    })
+
+
+}
 
 
 // Call functions
-
-
+prevCities();
+prevCityClick();
+userCity();
