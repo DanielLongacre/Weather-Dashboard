@@ -81,7 +81,7 @@ function APIcall() {
 
     var url = 'https://api.openweathermap.org/data/2.5/forecast?q=';
     var currentURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
-    var APIKey = '&appid=6fda8e05fd463ff807e270df95f92c8d';
+    var APIKey = '&appid=6fda8e05fd463ff807e270df95f92c8d&units=imperial';
     var queryURL = url + city + APIKey;
     current_weather_url = currentURL + city + APIKey;
 
@@ -92,22 +92,38 @@ function APIcall() {
 
         //Iterate through weather data sets
         for(var i = 0; i < response.list.length; i++) {
-            let day = response.list[i].dt_txt.split("-")[2].split(" ")[0];
-            let month = response.list[i].dt_txt.split("-")[1];
-            let year = response.list[i].dt_txt.split("-")[0];
-            $("#" + day_number + "date").text(month + "/" + day + "/" + year); 
-            let temp = Math.round(((response.list[i].main.temp - 273.15) *9/5+32));
-            $("#" + day_number + "five_day_temp").text("Temp: " + temp + String.fromCharCode(176)+"F");
-            $("#" + day_number + "five_day_humidity").text("Humidity: " + response.list[i].main.humidity);
-            $("#" + day_number + "five_day_icon").attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png");
-            console.log(response.list[i].dt_txt.split("-"));
-            console.log(day_number);
-            console.log(response.list[i].main.temp);
-            day_number++; 
-        }
 
+            if(response.list[i].dt_txt.split(" ")[1] == "09:00:00") {
+                let day = response.list[i].dt_txt.split("-")[2].split(" ")[0];
+                let year = response.list[i].dt_txt.split("-")[0];
+                let month = response.list[i].dt_txt.split("-")[1];
+                let temp = response.list[i].main.temp;
+                $("#" + day_number + "date").text(month + "/" + day + "/" + year); 
+                $("#" + day_number + "five_day_humidity").text("Humidity: " + response.list[i].main.humidity);
+                $("#" + day_number + "five_day_temp").text("Temp: " + temp + "F");
+                console.log(response.list[i].dt_txt.split("-"));
+                $("#" + day_number + "five_day_icon").attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png");
+                console.log(response.list[i].main.temp);
+                console.log(day_number);
+                day_number++;
+            }
+
+        }
+        
     })
 
+
+    fetch(current_weather_url).then(function(current_data) {
+        console.log(current_data);
+        let temp = Math.round(((current_data.main.temp - 273.15) * 9/5 + 32))
+        console.log("The temperature in " + city + " is: " + temp);
+        $("#today_temp").text("Temperature: " + temp + String.fromCharCode(176)+"F");
+        $("#today_humidity").text("Humidity: " + current_data.main.humidity);
+        $("#today_wind_speed").text("Wind Speed: " + current_data.wind.speed);
+        $("#today_icon_div").attr({"src": "http://openweathermap.org/img/w/" + current_data.weather[0].icon + ".png",
+         "height": "100px", "width":"100px"});
+
+    })
 
 }
 
