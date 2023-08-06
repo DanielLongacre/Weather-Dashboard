@@ -3,6 +3,10 @@ var cities = [];
 var city = '';
 
 
+$(document).ready(function() {
+    $('.today_weather').hide();
+ });
+
 //Function that gets previously searched for cities
 function prevCities() {
     var saved_cities = JSON.parse(localStorage.getItem('cities'));
@@ -47,6 +51,7 @@ function prevCityClick() {
         console.log("Does this work?");
         city = $(this).text().trim();
         APIcall();
+        $('.today_weather').show();
     })
 }
 
@@ -73,6 +78,7 @@ function userCity() {
         saveCity();
         prevCityBtns();
     })
+    $('.today_weather').show();
 }
 
 
