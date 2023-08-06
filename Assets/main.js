@@ -78,8 +78,9 @@ function userCity() {
         APIcall();
         saveCity();
         prevCityBtns();
+        $('.today_weather').show();
     })
-    $('.today_weather').show();
+    
 }
 
 
