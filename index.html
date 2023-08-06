@@ -11,27 +11,75 @@
     <header id="pageTitle" class="container-fluid  pt-3 pb-3 text-center"><h1 class="text-white">Weather Dashboard</h1></header>
 
     <div class="container-fluid row">
+        <!-- Search section -->
         <div class="col-3 left_div justify-content-center pt-3">
             <div class="search_div mb-4">
-            <h5 class="justify-content-center pt-2 pl-3">Search by city: </h5>
-                <form class="form-inline my-2 my-lg-0 mt-3 ml-3">
-                        <input class="form-control mr-sm-2 float-left" type="search" placeholder="Search" id= "search_bar" aria-label="Search">
-                        <button id="searchbtn" class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-                </form>
+                <h5 class="justify-content-center pt-2 pl-3">Search by city: </h5>
+                    <form class="form-inline my-2 my-lg-0 mt-3 ml-3">
+                            <input class="form-control mr-sm-2 float-left" type="search" placeholder="Search" id= "search_bar" aria-label="Search">
+                            <button id="searchbtn" class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
             </div>
             <h5 class="justify-content-center pt-2 pl-3">Your previously searched cities: </h5>
             <div class="container my-3 col-12" id="searched_cities_container">
                 <!-- Where I will add buttons for previous searched cities -->
             </div>
         </div>
-        <div class="col-12 col-md-8">
-          <h2 class="subtitle">Showing City Weather: <span id="city-search-term"></span></h2>
-          <div id="forecast-container" class="list-group">
-            <!-- Where I will add the big and small cards for forecast -->
 
-          </div>
+
+        <!-- Forecast section -->
+        <div class="today_weather col-9 pt-3">
+            <div class="bg-light p-3">
+                    <h2 class="justify-content-center text-dark" id="name_of_city"></h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <p id="today_temp"></p>
+                            <p id="today_humidity"></p>
+                            <p id="today_wind_speed"></p>
+                            <img id="today_icon_div" src="">
+                        </div>
+                    </div> 
+            </div>  
+
+            <div class="five-day-div bg-light p-3 m-3 w-100">
+                    <div class="bg-light">
+                        <h5 class="text-dark">Five Day Weather Forecast</h5>
+                    </div>
+                <div class="row justify-content-center">
+                    <div id="day0" class="card-body mx-2 my-2">
+                        <h5 id="0date"></h5>
+                        <p id="0five_day_temp"></p>
+                        <p id="0five_day_humidity"></p>
+                        <img id="0five_day_icon" src="">
+                    </div>
+                    <div id="day1" class="card-body mx-2 my-2">
+                            <h5 id="1date"></h5>
+                            <p id="1five_day_temp"></p>
+                            <p id="1five_day_humidity"></p>
+                            <img id="1five_day_icon" src="">
+                    </div>
+                    <div id="day2" class="card-body mx-2 my-2"> 
+                            <h5 id="2date"></h5>
+                            <p id="2five_day_temp"></p>
+                            <p id="2five_day_humidity"></p>
+                            <img id="2five_day_icon" src="">
+                    </div>
+                    <div id="day3" class="card-body mx-2 my-2">
+                            <h5 id="3date"></h5>
+                            <p id="3five_day_temp"></p>
+                            <p id="3five_day_humidity"></p>
+                            <img id="3five_day_icon" src="">
+                    </div>
+                    <div id="day4" class="card-body mx-2 my-2">
+                            <h5 id="4date"></h5>
+                            <p id="4five_day_temp"></p>
+                            <p id="4five_day_humidity"></p>
+                            <img id="4five_day_icon" src="">
+                    </div>
+                </div>
+            </div>
+
         </div>
-
     </div>    
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
