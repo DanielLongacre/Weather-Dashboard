@@ -1,9 +1,8 @@
 var pastCities = document.querySelector('#searched_cities_container');
-var userCity = document.querySelector('#userInput');
-var forecastContainerEl = document.querySelector('#forecast-container');
-var citySearchTerm = document.querySelector('#city-search-term');
 var cities = [];
-
+var city = '';
+var APIKey = '6fda8e05fd463ff807e270df95f92c8d';
+var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 
 
 //Function that gets previously searched for cities
@@ -14,20 +13,14 @@ function pastCities() {
         cities = saved_cities
     }
 
-    
+    prevCityBtns();
 }
-
 
 
 //Function to save searched city
 function saveCity() {
     localStorage.setItem('cities', JSON.stringify(cities));
 }
-
-var city = $('#userInput').val();
-var APIKey = '6fda8e05fd463ff807e270df95f92c8d';
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
-
 
 
 //Get previously searched for cities and create buttons for them
@@ -45,11 +38,45 @@ function prevCityBtns() {
         btnEl.setAttribute('class', 'listBtn');
 
         pastCities.appendChild(btnEl);
-        
+
     }
-
-
 }
+
+
+//Click function for newly created previous city buttons
+function prevCityClick() {
+    $('listBtn').on('click', function(event) {
+        event.preventDefault();
+        console.log("Does this work?");
+        city = $(this).text().trim();
+
+    })
+}
+
+//Function to add user city to cities array
+function userCity() {
+    $('#searchbtn').on('click', function(event) {
+        event.preventDefault();
+        city = $(this).prev().val().trim();
+
+        //Add city to array
+        cities.push(city);
+
+        //Don't let array be larger than 7
+        if(citites.length > 7) {
+            cities.shift()
+        }
+
+        //Return if blank
+        if(city == '') {
+            return;
+        }
+
+        saveCity();
+        prevCityBtns()
+    })
+}
+
 
 
 
