@@ -14,7 +14,8 @@
     <header id="pageTitle" class="container-fluid  pt-3 pb-3 text-center"><h1 class="text-white">Weather Dashboard</h1></header>
 
     <div class="container-fluid row">
-        <!-- Search section -->
+
+        <!-- SEARCH SECTION -->
         <div class="col-3 left_div justify-content-center pt-3">
             <div class="search_div mb-4">
                 <h5 class="justify-content-center pt-2 pl-3">Search by city: </h5>
@@ -30,9 +31,12 @@
         </div>
 
 
-        <!-- Forecast section -->
+        <!-- FORECAST SECTION -->
+
+
+        <!-- Today's Forecast -->
         <div class="today_weather col-9 pt-3">
-            <div class="bg-light p-3">
+            <div class="current-day bg-light p-3">
                     <h2 class="justify-content-center text-dark" id="name_of_city"></h2>
                     <div class="row">
                         <div class="col-6">
@@ -44,18 +48,20 @@
                     </div> 
             </div>  
 
+
+            <!-- 5 Day Forecast -->
             <div class="five-day-div bg-light p-3 m-3 w-100">
                     <div class="bg-light">
                         <h5 class="text-dark">Five Day Weather Forecast</h5>
                     </div>
                 <div class="row justify-content-center">
-                    <div id="day0" class="card-body mx-2 my-2">
+                    <div id="day0" class="card-body col-12 mx-2 my-2">
                         <h5 id="0date"></h5>
                         <p id="0five_day_temp"></p>
                         <p id="0five_day_humidity"></p>
                         <img id="0five_day_icon" src="">
                     </div>
-                    <div id="day1" class="card-body mx-2 my-2">
+                    <div id="day1" class="card-body col-12 mx-2 my-2">
                             <h5 id="1date"></h5>
                             <p id="1five_day_temp"></p>
                             <p id="1five_day_humidity"></p>
