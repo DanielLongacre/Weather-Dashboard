@@ -2,12 +2,12 @@ var pastCities = document.querySelector('#searched_cities_container');
 var cities = [];
 var city = '';
 
-
+//Hide forecast on initial page load
 $(document).ready(function() {
     $('.today_weather').hide();
  });
 
-//Function that gets previously searched for cities
+//Function that gets previously searched for cities from local storage
 function prevCities() {
     var saved_cities = JSON.parse(localStorage.getItem('cities'));
 
@@ -18,7 +18,7 @@ function prevCities() {
 }
 
 
-//Function to save searched city
+//Function to save searched city in local storage
 function saveCity() {
     localStorage.setItem('cities', JSON.stringify(cities));
 }
@@ -66,6 +66,7 @@ function userCity() {
 
         //Don't let array be larger than 7
         if(cities.length > 7) {
+            //Remove first item in array
             cities.shift()
         }
 
@@ -82,7 +83,7 @@ function userCity() {
 }
 
 
-//Function to get API data
+//Function to get API data from 2 different URL's
 function APIcall() {
 
     var url = 'https://api.openweathermap.org/data/2.5/forecast?q=';
@@ -93,6 +94,7 @@ function APIcall() {
 
     $('#name_of_city').text(city);
 
+    //Data for 5 Day Forecast
     fetch(queryURL).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
@@ -124,7 +126,7 @@ function APIcall() {
  
     })
 
-
+    //Data for Current-Day Forecast
     fetch(current_weather_url).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
